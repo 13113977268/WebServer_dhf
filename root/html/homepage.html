@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+      <base href="<%=basePath %>"/>
+    <title>主页面</title>
+    <!-- <%--引入easyUI的资源--%> -->
+    <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../themes/demo.css">
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <!-- <%--声明js代码域--%> -->
+    <script type="text/javascript">
+    /****************设置树组件*************************/
+    $(function () {
+        $("#myTree").tree({
+            onClick:function (node) {
+                console.log(node)
+            }
+        })
+    })
+	/*******************树与面板联动*********************/
+	$(function () {
+			 $("#myTree").tree({
+					onClick:function (node) {
+						//判断当前点击的节点是否具有子节点
+						var cs=node.children;
+						if(!cs){
+							//判断菜单节点的选项卡是否存在
+							var flag=$("#tt").tabs('exists',node.text);
+							if(flag){
+								//选中菜单节点对用的选项卡
+								$("#tt").tabs('select',node.text);
+							}else{
+								//新增选项卡
+								//------------------这里可以编写弹出的选项卡的内容
+								if(node.text=='用电概况')	
+								{
+								  var url="../html/powerConsum.html";
+								  var h_content = '<iframe scrolling="auto" frameborder="0" src="'+url+'" style="width:100%;height:100%;"></iframe>';
+									$("#tt").tabs('add',{
+									    id: '用电概况',
+										title:'用电概况',
+										//href:"/easyui.html",
+										content:h_content, 
+										closable:true,
+										tools:[{
+												iconCls:'icon-mini-refresh',
+												handler:function(){
+													alert('refresh');
+												}
+												}]
+										
+									})
+								}
+								else if(node.text=='低压铸造区')
+								{
+										$("#tt").tabs('add',{
+												title:'低压铸造区生产进度看板',
+												content:'这里是低压铸造区生产进度看板的界面',
+												closable:true,
+												tools:[{
+														iconCls:'icon-mini-refresh',
+														handler:function(){
+															alert('refresh');
+														}
+														}]
+												
+											})
+								}
+								else if(node.text=='实时数据监控')	
+								{
+								  var url="../html/realTimeDataMonitoring.html";
+								  var h_content = '<iframe scrolling="auto" frameborder="0" src="'+url+'" style="width:100%;height:100%;"></iframe>';
+									$("#tt").tabs('add',{
+									    id: '实时数据监控',
+										title:'实时数据监控',
+										//href:"/easyui.html",
+										content:h_content, 
+										closable:true,
+										tools:[{
+												iconCls:'icon-mini-refresh',
+												handler:function(){
+													alert('refresh');
+												}
+												}]
+										
+									})
+								}
+								else
+								{
+								$("#tt").tabs('add',{
+									title:node.text,
+									closable:true
+								})
+								}
+								
+							}
+						}
+					}
+				})
+			})
+	/*******************链接按钮弹出弹窗*********************/	
+	  $(function () {
+			//给linkbutton增加单击事件
+			$("#btn").click(function () {
+				//$.messager.alert("警告","你的电脑将在10秒后关机","warning");
+				$.messager.confirm('确认框', '你确定要删除吗?', function (r) {
+					 if (r) {
+							alert("aaa:"+r);
+						 }});
+			})
+		})
+    
+    </script>
+	
+    </head>
+    <body class="easyui-layout">
+	<div data-options="region:'north',split:false" style="height:100px;"></div>
+    <div data-options="region:'south',split:false" style="height:100px;"></div>
+    <div data-options="region:'east',split:false" style="width:100px;"></div>
+	   <div data-options="region:'west',split:false" style="width:300px;">
+		<!-- <!-- <%--accordion组件完成 折叠效果--%> --> 
+		<div id="aa" class="easyui-accordion" data-options="fit:true,border:false,animate:true,selected:1" style="width:300px;height:200px;">
+			
+			<div title="系统介绍" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">
+				<h3 style="color:#0099FF;">介绍:</h3>
+				<p>这里是EasyUI的前端框架与C++多线程服务后端加MySQL数据库</p>
+			</div>
+			<div title="系统组成" data-options="iconCls:'icon-reload'" style="padding:10px;">
+				<ul id="myTree" class="easyui-tree">
+					<!-- <%--声明一级菜单--%> -->
+					<li>
+						<span>能源管理</span>
+						<%--声明二级菜单细信息--%>
+						<ul>
+							<li>用电概况</li>
+							<li>实时数据监控</li>
+							<li>单位电量统计</li>
+						</ul>
+					</li>
+					
+					
+					
+					<!-- <%--声明一级菜单信息--%> -->
+					<li>
+						<span>生产看板</span>
+						<%--声明二级菜单信息--%>
+						<ul>
+							<li>低压铸造区</li>
+							<li>中子区</li>
+							<li>热处理区</li>
+						</ul>
+					</li>
+					<!-- <%--普通一级菜单--%> -->
+					<li>
+					<span>资料管理</span>
+						<ul>
+							<li>产品图片</li>
+							<li>产品视频</li>
+						</ul>
+					</li>
+			</ul>
+
+			</div>
+			<div title="链接按钮" data-options="iconCls:'icon-reload'" style="padding:10px;">
+				<a id="btn" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'">测试linkbutton按钮</a>
+			</div>
+		</div>
+	</div> 
+	
+	<div data-options="region:'center',split:false" style="padding:5px;background:#eee;">
+			<div id="tt" class="easyui-tabs" style="width:500px;height:250px;" data-options="fit:true,border:true,plain:false,tabPosition:'top'">
+				
+				<div title="选择页" data-options="iconCls:'icon-reload',closable:true" style="padding:20px;display:none;">
+					<div align="center"><font size="5"> <strong>选项</strong></font></div> 
+							<br/>
+								<br/>
+								<form action="5" method="post">
+									<div align="center"><button type="submit">xxx.jpg</button></div>
+										</form>
+								<br/>
+										<form action="6" method="post">
+												<div align="center"><button type="submit" >xxx.avi</button></div>
+										</form>
+								<br/>
+								<form action="7" method="post">
+									<div align="center"><button type="submit">关注我</button></div>
+										</form>
+										<br/>
+										<form action="8" method="post">
+									<div align="center"><button type="submit">logindhf</button></div>
+										</form>
+										 <br/>
+								<form action="9" method="post">
+									<div align="center"><button type="submit">jquery-easyui</button></div>
+										</form>
+					
+				</div>
+				
+				<!-- <div title="Tab2" data-options="closable:true" style="overflow:auto;padding:20px;display:none;"> -->
+					
+				<!-- </div> -->
+				
+				<div title="Tab3" data-options="iconCls:'icon-reload',closable:true" style="padding:20px;display:none;">
+					<a href="/easyui.html">本文本</a> 是一个指向本网站中的一个页面的链接。</p>
+			   </div>
+	</div>
+	
+    <br/>
+    <br/>
+    
+    </body>
+</html>

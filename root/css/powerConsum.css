@@ -1,0 +1,80 @@
+/*内容背景和字体*/
+#dg {}
+.datagrid-body tr:nth-child(even) td{
+    background-color:#4F607C;
+     color:#BFFFBF;
+    font-size:13px;
+}
+#dg {}
+.datagrid-body tr:nth-child(odd) td{
+    background-color:#4F607C;
+    color:#BFFFBF;
+    font-size:14px;
+}
+
+/*表格头背景色*/
+#dg {}
+.datagrid-header tr{
+   background-color:#4F607C;
+     color:#BFFFBF;
+    font-size:13px;
+}
+
+
+#dg {}
+.datagrid-body td .datagrid-cell{
+    line-height: 50px;
+}
+
+ /* #bb{ */
+    /* border-radius: 1px; */
+    /* background: #4D579B; */
+/* } */
+ 
+#bb {
+    font-size: 14px;
+    font-family: 宋体;
+ 
+    width: 120px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+ 
+    color: white;
+  
+    border-radius: 1px;
+    background: #4D579B;
+    border: 0;
+    float: left;
+}
+
+
+/*字体颜色和大小*/
+#bx { 
+	width: 160px;
+    height: 30px;
+	 background: #4D579B;
+	background-color: #4D589B;
+    opacity:1;
+	border-radius: 1px;
+	}
+	
+/* #bx {} */
+/* .easyui-combobox */
+/* { */
+	/* /* width: 160px; */ */
+    /* /* height: 50px; */ */
+	 /* /* background: #4D579B; */ */
+	/* /* /* background-color: #4D589B; */ */ */
+    /* /* opacity:1; */ */
+	/* /* border-radius: 1px; */ */
+	
+	
+	/* height:42px; */
+
+/* 　　width:100%; */
+
+/* 　　text-align:center; */
+/* } */
+
+

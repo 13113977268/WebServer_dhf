@@ -1,0 +1,83 @@
+
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <div align="center"><font size="5"> <strong>实时数据监控</strong></font></div>
+        <title>Test</title>
+	<!-- 样式配置 -->
+	<!-- <link rel="stylesheet" type="text/css" href="../css/powerConsum.css"/>	 -->
+    <base href="<%=basePath %>"/>
+    <title>实时数据监控</title>
+    <!-- <%--引入easyUI的资源--%> -->
+    <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../themes/demo.css">
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+	<!-- 引入echarts的js标签 -->
+	<script type="text/javascript" src="../echarts/echarts.js"></script>
+    <!-- <%--声明js代码域--%> -->
+	
+	
+    <script type="text/javascript">
+	
+				$(function(){
+					postChart();
+				});
+				//学员职务统计图
+				function postChart(){
+					//这个echarts对象应该是在echarts-all.js文件里面初始化好的，所以直接拿来用，
+					var myChart = echarts.init(document.getElementById('echarts_post')); 
+					var option = {
+						title : {
+							text: '学员职务统计',
+						},
+						tooltip : {
+							trigger: 'axis'
+						},
+						legend: {
+							data:["科员","副科级","正科级","副处级","处级"]
+						},
+					  
+						calculable : true,
+						xAxis : [
+							{
+								type : 'category',
+								data : ["科员","副科级","正科级","副处级","处级"],
+							}
+						],
+						yAxis : [
+							{
+								type : 'value'
+							}
+						],
+						series : [
+							{
+								name:'人数',
+								type:'bar',
+								data:[13,9,5,4,2],
+							},
+							
+						]
+					};
+					myChart.setOption(option); 
+				}
+				</script>
+					
+	
+	
+</head>
+<body>
+<input id="bu" type="button" value="刷新" onclick="test()">
+
+    <!-- <%--1.通过标签创建panel组件--%> -->
+    
+	<!-- 引入echarts	 -->
+	<div id="echarts_post" style="width:1000px;height:400px;border: solid 1px;"></div>
+		
+    
+				
+</body>
+</html>
+    
